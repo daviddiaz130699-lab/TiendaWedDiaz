@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">BIENVENIDO DAVIID @Context.Session.GetString("Usuario")</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <a href="/Producto" class="btn btn-primary w-100 mb-3">
+                Productos
+            </a>
+        </div>
+        @if(Context.Session.GetString("Rol") == "Administrador")
+        {
+        <div class="col-md-3">
+            <a href="/Usuario" class="btn btn-success w-100 mb-3">
+                Usuarios
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/Categoria" class="btn btn-warning w-100 mb-3">
+                Categorias
+            </a>
+        </div>
+        }
+    </div>
+</div>

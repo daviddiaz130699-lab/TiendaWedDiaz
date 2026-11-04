@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TiendaWedDiaz.Models.Categoria>
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<h1>Lista de Categorías</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<a asp-action="Create" class="btn btn-success mb-3">+ Nueva Categoría</a>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Estado</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.Nombre</td>
+                <td>@c.Descripcion</td>
+                <td>@(c.Estado == "A" ? "Activo" : "Inactivo")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-sm btn-primary">Editar</a>
+                    <form asp-action="Delete" asp-route-id="@c.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('¿Eliminar esta categoría?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
